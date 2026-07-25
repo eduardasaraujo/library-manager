@@ -4,8 +4,52 @@
     <meta charset="UTF-8">
     <title>Livros</title>
 </head>
-<body>
-    <h1>Lista de Livros</h1>
-    <p>Em breve os livros cadastrados aparecerão aqui.</p>
+
+<h1>Biblioteca</h1>
+
+<h2>Cadastrar Livro</h2>
+
+<form action="/books" method="POST">
+
+    <label>Título:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Autor:</label><br>
+    <input type="text" name="author" required><br><br>
+
+    <label>ISBN:</label><br>
+    <input type="text" name="isbn" required><br><br>
+
+    <label>Categoria:</label><br>
+    <input type="text" name="category" required><br><br>
+
+    <button type="submit">Cadastrar</button>
+
+</form>
+
+<hr>
+
+<h2>Livros cadastrados</h2>
+
+{% if books %}
+
+<ul>
+
+{% for book in books %}
+
+<li>
+    {{ book.title }} - {{ book.author }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+    <p>Nenhum livro cadastrado.</p>
+
+{% endif %}
+
 </body>
 </html>
