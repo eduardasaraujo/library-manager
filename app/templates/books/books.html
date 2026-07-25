@@ -39,6 +39,11 @@
 
 <li>
     {{ book.title }} - {{ book.author }}
+
+    <a href="/books/delete/{{ book.id }}">
+        Excluir
+    </a>
+    
 </li>
 
 {% endfor %}

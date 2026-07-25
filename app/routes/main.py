@@ -26,3 +26,14 @@ def books():
     books = Book.query.all()
 
     return render_template("books/books.html", books=books)
+
+@main.route("/books/delete/<int:id>")
+def delete_book(id):
+
+    book = Book.query.get_or_404(id)
+
+    db.session.delete(book)
+
+    db.session.commit()
+
+    return redirect("/books")
