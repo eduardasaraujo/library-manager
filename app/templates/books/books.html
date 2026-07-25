@@ -40,10 +40,14 @@
 <li>
     {{ book.title }} - {{ book.author }}
 
+   <a href="/books/edit/{{ book.id }}">
+        Editar
+    </a> 
+
     <a href="/books/delete/{{ book.id }}">
         Excluir
     </a>
-    
+
 </li>
 
 {% endfor %}

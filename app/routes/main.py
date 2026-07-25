@@ -37,3 +37,21 @@ def delete_book(id):
     db.session.commit()
 
     return redirect("/books")
+
+@main.route("/books/edit/<int:id>", methods=["GET", "POST"])
+def edit_book(id):
+
+    book = Book.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        book.title = request.form["title"]
+        book.author = request.form["author"]
+        book.isbn = request.form["isbn"]
+        book.category = request.form["category"]
+
+        db.session.commit()
+
+        return redirect("/books")
+
+    return render_template("books/edit_book.html", book=book)
