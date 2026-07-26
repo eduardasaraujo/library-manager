@@ -12,16 +12,31 @@
 <form action="/books" method="POST">
 
     <label>Título:</label><br>
-    <input type="text" name="title" required><br><br>
+    <input type="text" id="title" name="title" required><br><br>
 
     <label>Autor:</label><br>
-    <input type="text" name="author" required><br><br>
+    <input type="text" id="author" name="author" required><br><br>
 
     <label>ISBN:</label><br>
-    <input type="text" name="isbn" required><br><br>
+    <input type="text" id="isbn" name="isbn" required><br><br>
+
+    <button type="button" onclick="buscarLivro()">
+        Buscar
+    </button>
+
+    <br><br>
+
+    <img
+    id="book-cover"
+    src=""
+    width="150"
+    style="display:none; margin-bottom:20px;"
+    >
+
+    <br>
 
     <label>Categoria:</label><br>
-    <input type="text" name="category" required><br><br>
+    <input type="text" id="category" name="category" required><br><br>
 
     <button type="submit">Cadastrar</button>
 
@@ -59,6 +74,8 @@
     <p>Nenhum livro cadastrado.</p>
 
 {% endif %}
+
+<script src="{{ url_for('static', filename='js/books.js') }}"></script>
 
 </body>
 </html>
