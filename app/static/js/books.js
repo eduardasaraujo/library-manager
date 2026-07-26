@@ -10,16 +10,13 @@ async function buscarLivro() {
     }
 
     const book = await response.json();
+    const cover = document.getElementById("book-cover");
+
+    cover.src = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+    cover.style.display = "block";
 
     document.getElementById("title").value = book.title;
     document.getElementById("author").value = book.author;
     document.getElementById("category").value = book.category;
-
-    const cover = document.getElementById("book-cover");
-
-    if (book.thumbnail) {
-        cover.src = book.thumbnail;
-        cover.style.display = "block";
-    }
 
 }

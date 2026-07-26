@@ -2,80 +2,177 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Livros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Manager</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<h1>Biblioteca</h1>
+<body class="bg-light">
 
-<h2>Cadastrar Livro</h2>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">📚 Library Manager</span>
+    </div>
+</nav>
 
-<form action="/books" method="POST">
+<div class="container my-5">
 
-    <label>Título:</label><br>
-    <input type="text" id="title" name="title" required><br><br>
+    <div class="card shadow mb-5">
+        <div class="card-header">
+            <h3 class="mb-0">Cadastrar Livro</h3>
+        </div>
 
-    <label>Autor:</label><br>
-    <input type="text" id="author" name="author" required><br><br>
+        <div class="card-body">
 
-    <label>ISBN:</label><br>
-    <input type="text" id="isbn" name="isbn" required><br><br>
+            <form action="/books" method="POST">
 
-    <button type="button" onclick="buscarLivro()">
-        Buscar
-    </button>
+                <div class="mb-3">
+                    <label class="form-label">ISBN</label>
 
-    <br><br>
+            <div class="input-group">
+                <input
+                type="text"
+                id="isbn"
+                name="isbn"
+                class="form-control"
+                required
+            >
 
-    <img
-    id="book-cover"
-    src=""
-    width="150"
-    style="display:none; margin-bottom:20px;"
-    >
+            <button
+                class="btn btn-primary"
+                type="button"
+                onclick="buscarLivro()"
+            >
+            
+            Buscar
+        </button>
+    </div>
+</div>
 
-    <br>
+                <div class="text-center mb-4">
+                    <img
+                        id="book-cover"
+                        src=""
+                        class="img-fluid rounded shadow"
+                        style="display:none; max-height:250px;"
+                    >
+                </div>
 
-    <label>Categoria:</label><br>
-    <input type="text" id="category" name="category" required><br><br>
+                <div class="mb-3">
+                    <label class="form-label">Título</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="form-control"
+                        required
+                    >
+                </div>
 
-    <button type="submit">Cadastrar</button>
+                <div class="mb-3">
+                    <label class="form-label">Autor</label>
+                    <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        class="form-control"
+                        required
+                    >
+                </div>
 
-</form>
+                <div class="mb-3">
+                    <label class="form-label">Categoria</label>
+                    <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        class="form-control"
+                        required
+                    >
+                </div>
 
-<hr>
+                <button class="btn btn-success w-100">
+                    Cadastrar Livro
+                </button>
 
-<h2>Livros cadastrados</h2>
+            </form>
 
-{% if books %}
+        </div>
+    </div>
 
-<ul>
+    <div class="card shadow">
 
-{% for book in books %}
+        <div class="card-header">
+            <h3 class="mb-0">Livros Cadastrados</h3>
+        </div>
 
-<li>
-    {{ book.title }} - {{ book.author }}
+        <div class="card-body">
 
-   <a href="/books/edit/{{ book.id }}">
-        Editar
-    </a> 
+            {% if books %}
 
-    <a href="/books/delete/{{ book.id }}">
-        Excluir
-    </a>
+            <table class="table table-striped table-hover align-middle">
 
-</li>
+                <thead class="table-dark">
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th width="180">Ações</th>
+                    </tr>
+                </thead>
 
-{% endfor %}
+                <tbody>
 
-</ul>
+                {% for book in books %}
 
-{% else %}
+                    <tr>
 
-    <p>Nenhum livro cadastrado.</p>
+                        <td>{{ book.title }}</td>
 
-{% endif %}
+                        <td>{{ book.author }}</td>
+
+                        <td>
+
+                            <a
+                                href="/books/edit/{{ book.id }}"
+                                class="btn btn-outline-warning btn-sm"
+                            >
+                                Editar
+                            </a>
+
+                            <a
+                                href="/books/delete/{{ book.id }}"
+                                class="btn btn-outline-danger btn-sm"
+                            >
+                                Excluir
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="alert alert-info">
+                Nenhum livro cadastrado.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
 
 <script src="{{ url_for('static', filename='js/books.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
