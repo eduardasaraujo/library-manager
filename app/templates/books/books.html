@@ -41,6 +41,7 @@
 <div class="container my-5">
 
     <div class="card shadow mb-5">
+
         <div class="card-header">
             <h3 class="mb-0">Cadastrar Livro</h3>
         </div>
@@ -52,37 +53,43 @@
                 <div class="mb-3">
                     <label class="form-label">ISBN</label>
 
-            <div class="input-group">
-                <input
-                type="text"
-                id="isbn"
-                name="isbn"
-                class="form-control"
-                required
-            >
+                    <div class="input-group">
 
-            <button
-                class="btn btn-primary"
-                type="button"
-                onclick="buscarLivro()"
-            >
-            
-            Buscar
-        </button>
-    </div>
-</div>
+                        <input
+                            type="text"
+                            id="isbn"
+                            name="isbn"
+                            class="form-control"
+                            required
+                        >
+
+                        <button
+                            class="btn btn-primary"
+                            type="button"
+                            onclick="buscarLivro()"
+                        >
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </div>
 
                 <div class="text-center mb-4">
+
                     <img
                         id="book-cover"
                         src=""
                         class="img-fluid rounded shadow"
                         style="display:none; max-height:250px;"
                     >
+
                 </div>
 
                 <div class="mb-3">
+
                     <label class="form-label">Título</label>
+
                     <input
                         type="text"
                         id="title"
@@ -90,10 +97,13 @@
                         class="form-control"
                         required
                     >
+
                 </div>
 
                 <div class="mb-3">
+
                     <label class="form-label">Autor</label>
+
                     <input
                         type="text"
                         id="author"
@@ -101,10 +111,13 @@
                         class="form-control"
                         required
                     >
+
                 </div>
 
                 <div class="mb-3">
+
                     <label class="form-label">Categoria</label>
+
                     <input
                         type="text"
                         id="category"
@@ -112,6 +125,27 @@
                         class="form-control"
                         required
                     >
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">Avaliação</label>
+
+                    <select
+                        name="rating"
+                        class="form-select"
+                    >
+
+                        <option value="">Sem avaliação</option>
+                        <option value="1">⭐ 1 estrela</option>
+                        <option value="2">⭐⭐ 2 estrelas</option>
+                        <option value="3">⭐⭐⭐ 3 estrelas</option>
+                        <option value="4">⭐⭐⭐⭐ 4 estrelas</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 estrelas</option>
+
+                    </select>
+
                 </div>
 
                 <button class="btn btn-success w-100">
@@ -121,6 +155,7 @@
             </form>
 
         </div>
+
     </div>
 
     <div class="card shadow">
@@ -136,11 +171,15 @@
             <table class="table table-striped table-hover align-middle">
 
                 <thead class="table-dark">
+
                     <tr>
                         <th>Título</th>
                         <th>Autor</th>
+                        <th>Categoria</th>
+                        <th>Avaliação</th>
                         <th width="180">Ações</th>
                     </tr>
+
                 </thead>
 
                 <tbody>
@@ -152,6 +191,26 @@
                         <td>{{ book.title }}</td>
 
                         <td>{{ book.author }}</td>
+
+                        <td>{{ book.category }}</td>
+
+                        <td>
+
+                            {% if book.rating %}
+
+                                {% for i in range(book.rating) %}
+                                    ⭐
+                                {% endfor %}
+
+                                ({{ book.rating }}/5)
+
+                            {% else %}
+
+                                -
+                            
+                            {% endif %}
+
+                        </td>
 
                         <td>
 
@@ -181,9 +240,9 @@
 
             {% else %}
 
-            <div class="alert alert-info">
-                Nenhum livro cadastrado.
-            </div>
+                <div class="alert alert-info">
+                    Nenhum livro cadastrado.
+                </div>
 
             {% endif %}
 

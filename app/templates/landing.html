@@ -1,12 +1,239 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Manager</title>
-</head>
-<body>
-    <h1>Landing Page</h1>
-    <p>Architecture funcionando 🚀</p>
-</body>
-</html>
+{% extends "layouts/base.html" %}
+
+{% block title %}Library Manager{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<header class="navbar">
+
+    <div class="logo">
+        <span class="library">Library</span>
+        <span class="manager">Manager</span>
+    </div>
+
+    <nav>
+
+        <a href="#features">Recursos</a>
+
+        <a href="{{ url_for('auth.login') }}">
+            Entrar
+        </a>
+
+        <a href="{{ url_for('auth.register') }}" class="btn-outline">
+            Criar conta
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+
+<section class="hero container">
+
+    <div class="hero-left">
+
+        <div class="badge">
+
+            <i data-lucide="library-big"></i>
+
+            Biblioteca digital moderna
+
+        </div>
+
+        <h1>
+
+            Sua biblioteca,
+            <span>reinventada.</span>
+
+        </h1>
+
+        <p>
+
+            Organize sua coleção, descubra novos títulos através do ISBN
+            e acompanhe todos os seus livros em uma interface elegante,
+            rápida e intuitiva.
+
+        </p>
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('auth.register') }}"
+                class="btn-primary">
+
+                Começar agora
+
+            </a>
+
+            <a
+                href="{{ url_for('auth.login') }}"
+                class="btn-secondary">
+
+                Fazer login
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="circle"></div>
+
+        <img
+            src="{{ url_for('static', filename='img/crime-e-castigo.jpg') }}"
+            alt="Crime e Castigo"
+            class="book book-1">
+
+        <img
+            src="{{ url_for('static', filename='img/divina-comedia.jpg') }}"
+            alt="A Divina Comédia"
+            class="book book-2">
+
+        <img
+            src="{{ url_for('static', filename='img/conde-monte-cristo.jpg') }}"
+            alt="O Conde de Monte Cristo"
+            class="book book-3">
+
+    </div>
+
+</section>
+
+<section class="stats container">
+
+    <div class="stat">
+
+        <h2>ISBN</h2>
+
+        <p>Busca automática de informações.</p>
+
+    </div>
+
+    <div class="stat">
+
+        <h2>100%</h2>
+
+        <p>Biblioteca privada para cada usuário.</p>
+
+    </div>
+
+    <div class="stat">
+
+        <h2>Open Library</h2>
+
+        <p>Dados completos diretamente da API.</p>
+
+    </div>
+
+    <div class="stat">
+
+        <h2>CRUD</h2>
+
+        <p>Cadastro, edição e gerenciamento de livros.</p>
+
+    </div>
+
+</section>
+
+<section id="features" class="features container">
+
+    <div class="card">
+
+        <i data-lucide="library"></i>
+
+        <h3>Organize sua coleção</h3>
+
+        <p>
+
+            Mantenha todos os seus livros organizados em um único lugar,
+            separados por usuário e acessíveis quando precisar.
+
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <i data-lucide="search-code"></i>
+
+        <h3>Busca inteligente</h3>
+
+        <p>
+
+            Utilize o ISBN para preencher automaticamente
+            informações completas do livro.
+
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <i data-lucide="book-open-text"></i>
+
+        <h3>Sua biblioteca</h3>
+
+        <p>
+
+            Dos clássicos da literatura aos lançamentos mais recentes, 
+            toda sua coleção organizada.
+
+
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <i data-lucide="sparkles"></i>
+
+        <h3>Experiência moderna</h3>
+
+        <p>
+
+            Interface limpa, rápida e agradável para utilizar diariamente.
+
+        </p>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div>
+
+            <h3>Library Manager</h3>
+
+            <p>
+
+                Desenvolvido em Python, Flask,
+                SQLAlchemy e Open Library API.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <a href="{{ url_for('auth.login') }}">Login</a>
+
+            <a href="{{ url_for('auth.register') }}">Cadastro</a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</main>
+
+{% endblock %}
