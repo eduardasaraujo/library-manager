@@ -25,10 +25,20 @@ def search_by_isbn(isbn):
 
         author_name = get_author_name(data["authors"][0]["key"])
 
+        category = ""
+
+        if "subjects" in data and data["subjects"]:
+            first_subject = data["subjects"][0]
+
+            if isinstance(first_subject, dict):
+                category = first_subject.get("name", "")
+            else:
+                category = first_subject
+
         return {
             "title": data.get("title", ""),
             "author": author_name,
-            "category": "Não informado",
+            "category": category,
             "publish_date": data.get("publish_date"),
             "pages": data.get("number_of_pages")
         }
