@@ -1,6 +1,14 @@
-class Config:
-    SECRET_KEY = "library-manager-secret"
+import os
+from dotenv import load_dotenv
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///library.db"
+load_dotenv()
+
+class Config:
+    SECRET_KEY = os.getenv("SECRET_KEY", "library-manager-secret")
+
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL",
+        "sqlite:///library.db"
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
