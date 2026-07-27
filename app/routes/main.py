@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required
 from app.models import Book
 from app import db
 from app.services.books_api import search_by_isbn
@@ -11,6 +12,7 @@ def landing():
     return render_template("landing.html")
 
 @main.route("/books", methods=["GET", "POST"])
+@login_required
 def books():
     if request.method == "POST":
         new_book = Book(
@@ -30,6 +32,7 @@ def books():
     return render_template("books/books.html", books=books)
 
 @main.route("/books/delete/<int:id>")
+@login_required
 def delete_book(id):
 
     book = Book.query.get_or_404(id)
@@ -41,6 +44,7 @@ def delete_book(id):
     return redirect("/books")
 
 @main.route("/books/edit/<int:id>", methods=["GET", "POST"])
+@login_required
 def edit_book(id):
 
     book = Book.query.get_or_404(id)
@@ -59,6 +63,7 @@ def edit_book(id):
     return render_template("books/edit_book.html", book=book)
 
 @main.route("/books/search/<isbn>")
+@login_required
 def search_book(isbn):
 
     book = search_by_isbn(isbn)
