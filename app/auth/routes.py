@@ -11,7 +11,14 @@ def register():
     print("Método recebido:", request.method)
 
     if request.method == "POST":
-        print("ENTROU NO POST")
+
+        existing_user = User.query.filter_by(
+            email=request.form["email"]
+        ).first()
+
+        if existing_user:
+            flash("Este e-mail já está cadastrado.", "danger")
+            return redirect(url_for("auth.register"))
 
         password = bcrypt.generate_password_hash(
             request.form["password"]
