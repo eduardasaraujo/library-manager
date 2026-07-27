@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Book
 from app import db
 from app.services.books_api import search_by_isbn
@@ -19,7 +19,8 @@ def books():
             title=request.form["title"],
             author=request.form["author"],
             isbn=request.form["isbn"],
-            category=request.form["category"]
+            category=request.form["category"],
+            user_id=current_user.id
         )
 
         db.session.add(new_book)
@@ -27,7 +28,8 @@ def books():
 
         return redirect("/books")
 
-    books = Book.query.all()
+    books = Book.query.filter_by(
+    user_id=current_user.id).all()
 
     return render_template("books/books.html", books=books)
 
